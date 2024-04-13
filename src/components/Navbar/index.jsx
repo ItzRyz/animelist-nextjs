@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <header className="bg-color-accent">
       <div className="flex flex-col items-center justify-between gap-2 p-4 md:flex-row md:w-full">
-        <Link href="/" className="text-2xl font-bold text-white text-color-dark">
+        <Link href="/" className="text-2xl font-bold text-color-dark">
           ANIMELIST
         </Link>
         <InputSearch />

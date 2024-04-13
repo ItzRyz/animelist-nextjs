@@ -8,7 +8,7 @@ const InputSearch = () => {
   const searchRef = useRef();
   const router = useRouter();
 
-  const handleKeyPress = (event) => {
+  const handleKey = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
       handleSearch();
@@ -29,7 +29,7 @@ const InputSearch = () => {
       <input
         placeholder="Search Anime.."
         className="w-full p-2 rounded-md"
-        onKeyDown={handleKeyPress}
+        onKeyDown={handleKey}
         ref={searchRef}
       />
       <button className="absolute top-2 end-2" onClick={handleSearch}>
