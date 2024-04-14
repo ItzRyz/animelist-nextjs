@@ -12,8 +12,8 @@ const VideoPlayer = ({ youtubeId }) => {
   };
 
   const option = {
-    widht: "200px",
-    height: "350px"
+    height: "240",
+    width: "320"
   };
 
   const Player = () => {
