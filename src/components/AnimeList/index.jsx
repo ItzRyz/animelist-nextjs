@@ -5,7 +5,7 @@ const AnimeList = ({ api }) => {
   return (
     <div className="grid grid-cols-2 gap-4 px-4 md:grid-cols-4 sm:grid-cols-3">
       {api &&
-        api.data.map((anime, index) => {
+        api.data?.map((anime, index) => {
           return (
             <Link
               key={index}
