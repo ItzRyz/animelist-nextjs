@@ -1,15 +1,32 @@
-const Pagination = ({ page }) => {
-  const fetchData = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/anime?`);
-    const data = await response.json();
-    latsPage(data);
+const Pagination = ({ page, lastPage, setPage }) => {
+  const scrollTop = () => {
+    scrollTo({
+      behavior: "smooth",
+      top: 0
+    });
+  };
+
+  const handleNextPage = () => {
+    setPage((prevState) => prevState + 1);
+    scrollTop();
+  };
+
+  const handlePrevPage = () => {
+    setPage((prevState) => prevState - 1);
+    scrollTop();
   };
 
   return (
     <div className="flex items-center justify-center gap-4 px-2 py-4 text-xl md:text-2xl text-color-primary">
-      <button className="transition-all hover:text-color-accent">Prev</button>
-      <p>{page} of 1065</p>
-      <button className="transition-all hover:text-color-accent">Next</button>
+      <button className="transition-all hover:text-color-accent" onClick={handlePrevPage}>
+        &lt;Prev
+      </button>
+      <p>
+        {page} of {lastPage}
+      </p>
+      <button className="transition-all hover:text-color-accent" onClick={handleNextPage}>
+        Next&gt;
+      </button>
     </div>
   );
 };

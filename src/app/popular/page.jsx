@@ -23,7 +23,13 @@ const Page = () => {
     <>
       <HeaderMenu title={`TOP ANIME #${page}`} />
       <AnimeList api={topAnime} />
-      <Pagination page={page} />
+      {topAnime.pagination && (
+        <Pagination
+          page={page}
+          lastPage={topAnime.pagination?.last_visible_page}
+          setPage={setPage}
+        />
+      )}
     </>
   );
 };
