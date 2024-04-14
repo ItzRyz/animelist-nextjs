@@ -9,7 +9,7 @@ const AnimeList = ({ api }) => {
           return (
             <Link
               key={index}
-              href={`/${anime.mal_id}`}
+              href={`/anime/${anime.mal_id}`}
               className="transition-all cursor-pointer text-color-primary hover:text-color-accent">
               <Image
                 src={anime.images.webp.image_url}
