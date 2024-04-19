@@ -1,3 +1,10 @@
+import {
+  generateRecommendation,
+  getLastRecommendation,
+  saveLastRecommendation,
+  oneWeek
+} from "@/libs/func-libs";
+
 export const getAnimeResponse = async (resource, query) => {
   const response = fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${resource}?${query}`);
   const anime = (await response).json();
@@ -10,11 +17,16 @@ export const getNestedAnimeResponse = async (resource, objectProp) => {
 };
 
 export const reproduce = (data, gap) => {
-  const first = ~~(Math.random() * (data.length - gap) + 1);
-  const last = first + gap;
-  const response = {
-    data: data.slice(first, last)
-  };
-
-  return response;
+  if (oneWeek()) {
+    const recommendation = generateRecommendation(data, gap);
+    saveLastRecommendation(recommendation);
+    return recommendation;
+  } else {
+    const lastRecommendation = getLastRecommendation();
+    if (lastRecommendation) {
+      return lastRecommendation;
+    } else {
+      return generateRecommendation(data, gap);
+    }
+  }
 };
