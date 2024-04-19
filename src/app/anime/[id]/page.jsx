@@ -1,4 +1,4 @@
-import { getAnimeResponse } from "@/app/libs/api-libs";
+import { getAnimeResponse } from "@/libs/api-libs";
 import VideoPlayer from "@/components/utilities/VideoPlayer";
 import Image from "next/image";
 
@@ -30,8 +30,8 @@ const Page = async ({ params: { id } }) => {
         </div>
         <div className="flex flex-wrap gap-2 px-4 pt-4 md:flex-nowrap text-color-primary">
           <Image
-            src={anime.data.images.webp.image_url}
-            alt={anime.data.images.jpg.image_url}
+            src={anime.data.images.webp.large_image_url}
+            alt={anime.data.images.jpg.large_image_url}
             width={250}
             height={250}
             className="object-cover w-full rounded"

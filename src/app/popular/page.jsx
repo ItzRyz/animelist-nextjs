@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import HeaderMenu from "@/components/utilities/HeaderMenu";
 import Pagination from "@/components/utilities/Pagination";
 import AnimeList from "@/components/AnimeList";
-import { getAnimeResponse } from "../libs/api-libs";
+import { getAnimeResponse } from "@/libs/api-libs";
 import Link from "next/link";
 
 const Page = () => {
