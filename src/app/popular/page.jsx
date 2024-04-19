@@ -5,7 +5,8 @@ import HeaderMenu from "@/components/utilities/HeaderMenu";
 import Pagination from "@/components/utilities/Pagination";
 import AnimeList from "@/components/AnimeList";
 import { getAnimeResponse } from "@/libs/api-libs";
-import Link from "next/link";
+import ButtonPath from "@/components/ButtonFunction/ButtonPath";
+import ButtonUpWheel from "@/components/ButtonFunction/ButtonUpWheel";
 
 const Page = () => {
   const [page, setPage] = useState(1);
@@ -22,12 +23,11 @@ const Page = () => {
 
   return (
     <>
-      <div className="float-left px-3 py-1 mt-2 ml-3 transition-all rounded-md text-color-primary bg-color-secondary hover:bg-color-accent">
-        <Link href={"/"}>Go Back</Link>
-      </div>
+      <ButtonPath path={"/"} text={"Go Back"} />
       <br />
       <HeaderMenu title={`TOP ANIME #${page}`} />
       <AnimeList api={topAnime} />
+      <ButtonUpWheel />
       {topAnime.pagination && (
         <Pagination
           page={page}
