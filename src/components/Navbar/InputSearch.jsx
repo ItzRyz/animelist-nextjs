@@ -17,10 +17,10 @@ const InputSearch = () => {
 
   const handleSearch = () => {
     const keyword = searchRef.current.value;
-    if (keyword) {
-      router.push(`/search/${keyword}`);
-    } else {
+    if (!keyword || keyword === " ") {
       null;
+    } else {
+      router.push(`/search/${keyword}`);
     }
   };
 

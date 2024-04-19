@@ -1,11 +1,13 @@
 import { getAnimeResponse } from "@/libs/api-libs";
 import VideoPlayer from "@/components/utilities/VideoPlayer";
 import Image from "next/image";
+import ButtonPath from "@/components/ButtonFunction/ButtonPath";
 
 const Page = async ({ params: { id } }) => {
   const anime = await getAnimeResponse(`anime/${id}`);
   return (
     <>
+      <ButtonPath path={"/"} text={"Go Back"} />
       <div className="px-4 pt-4">
         <h3 className="text-2xl text-color-primary">
           {anime.data.title} - {anime.data.year}

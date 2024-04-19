@@ -24,7 +24,6 @@ const Page = () => {
   return (
     <>
       <ButtonPath path={"/"} text={"Go Back"} />
-      <br />
       <HeaderMenu title={`TOP ANIME #${page}`} />
       <AnimeList api={topAnime} />
       <ButtonUpWheel />
