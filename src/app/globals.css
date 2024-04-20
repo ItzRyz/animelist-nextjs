@@ -55,3 +55,18 @@ img:hover {
     transform: scale(var(--s, 1)) translate(0px, 0px) rotate(180deg);
   }
 }
+
+/* Pop up animation button */
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-pop-up {
+  animation: slide-up 0.5s ease forwards;
+}
