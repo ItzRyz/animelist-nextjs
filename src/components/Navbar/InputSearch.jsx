@@ -17,7 +17,7 @@ const InputSearch = () => {
 
   const handleSearch = () => {
     const keyword = searchRef.current.value;
-    if (!keyword || keyword === " ") {
+    if (!keyword || keyword.trim() === "") {
       null;
     } else {
       router.push(`/search/${keyword}`);
