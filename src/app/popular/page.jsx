@@ -7,6 +7,7 @@ import AnimeList from "@/components/AnimeList";
 import { getAnimeResponse } from "@/libs/api-libs";
 import ButtonPath from "@/components/ButtonFunction/ButtonPath";
 import ButtonUpWheel from "@/components/ButtonFunction/ButtonUpWheel";
+import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
 
 const Page = () => {
   const [page, setPage] = useState(1);
@@ -23,7 +24,7 @@ const Page = () => {
 
   return (
     <>
-      <ButtonPath path={"/"} text={"Go Back"} />
+      <ButtonPath path={"/"} text={<ArrowLeft size={24} />} />
       <HeaderMenu title={`TOP ANIME #${page}`} />
       <AnimeList api={topAnime} />
       <ButtonUpWheel />

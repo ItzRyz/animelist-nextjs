@@ -32,8 +32,10 @@ const InputSearch = () => {
         onKeyDown={handleKey}
         ref={searchRef}
       />
-      <button className="absolute top-2 end-2" onClick={handleSearch}>
-        <MagnifyingGlass size={24} />
+      <button
+        className="absolute top-0 p-2 transition-all rounded-r-md end-0 bg-color-dark hover:bg-color-secondary"
+        onClick={handleSearch}>
+        <MagnifyingGlass size={24} color="white" />
       </button>
     </div>
   );

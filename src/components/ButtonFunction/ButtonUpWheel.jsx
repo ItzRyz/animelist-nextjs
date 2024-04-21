@@ -10,7 +10,7 @@ const ButtonUpWheel = () => {
       const windowHeight = window.innerHeight;
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-      setIsVisible(scrollTop > windowHeight * 4);
+      setIsVisible(scrollTop > windowHeight * 2);
     };
 
     window.addEventListener("scroll", handleScroll);
