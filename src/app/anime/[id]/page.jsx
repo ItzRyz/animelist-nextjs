@@ -3,16 +3,24 @@ import VideoPlayer from "@/components/utilities/VideoPlayer";
 import Image from "next/image";
 import ButtonPath from "@/components/ButtonFunction/ButtonPath";
 import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
+import CollectionButton from "@/components/ButtonFunction/CollectionButton";
+import { authSession } from "@/libs/auth-libs";
 
 const Page = async ({ params: { id } }) => {
   const anime = await getAnimeResponse(`anime/${id}`);
+
+  const user = await authSession();
+
   return (
     <>
       <ButtonPath path={"/"} text={<ArrowLeft size={24} />} />
       <div className="px-4 pt-8">
-        <h3 className="text-2xl text-color-primary">
-          {anime.data.title} - {anime.data.year}
-        </h3>
+        <div>
+          <h3 className="ml-3 text-2xl text-color-primary">
+            {anime.data.title} - {anime.data.year}
+          </h3>
+          <CollectionButton anime_mal_id={id} user_email={user?.email} />
+        </div>
         <div className="flex gap-2 px-4 pt-4 overflow-x-auto text-color-primary">
           <div className="flex flex-col items-center justify-center p-2 border rounded w-36 border-color-primary">
             <h3>Rank</h3>
