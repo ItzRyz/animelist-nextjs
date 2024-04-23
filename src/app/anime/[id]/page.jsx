@@ -1,10 +1,9 @@
 import { getAnimeResponse } from "@/libs/api-libs";
 import VideoPlayer from "@/components/utilities/VideoPlayer";
 import Image from "next/image";
-import ButtonPath from "@/components/ButtonFunction/ButtonPath";
-import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
 import CollectionButton from "@/components/ButtonFunction/CollectionButton";
 import { authSession } from "@/libs/auth-libs";
+import ButtonHis from "@/components/ButtonFunction/ButtonHis";
 
 const Page = async ({ params: { id } }) => {
   const anime = await getAnimeResponse(`anime/${id}`);
@@ -13,8 +12,8 @@ const Page = async ({ params: { id } }) => {
 
   return (
     <>
-      <ButtonPath path={"/"} text={<ArrowLeft size={24} />} />
       <div className="px-4 pt-8">
+        <ButtonHis />
         <div>
           <h3 className="ml-3 text-2xl text-color-primary">
             {anime.data.title} - {anime.data.year}

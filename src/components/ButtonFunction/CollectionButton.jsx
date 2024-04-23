@@ -11,11 +11,13 @@ const CollectionButton = ({ anime_mal_id, user_email }) => {
       body: JSON.stringify(data)
     });
 
-    const collection = await response.json();
-    console.log({ collection });
-  }; // https://5lkfjmnj-3000.asse.devtunnels.ms/
-  // ga salah open portnya kan? udah tu coba ok collection buttonnya mana?
-  // di local atau di port? di webnya yg buat ngerun v1 collection bntar
+    if (response.ok) {
+      // const collection = await response.json();
+      console.log(response); // ini undefined wait
+    } else {
+      console.log(response);
+    }
+  };
   return (
     <div>
       <button
