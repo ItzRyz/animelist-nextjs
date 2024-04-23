@@ -1,0 +1,49 @@
+"use client";
+
+import { MinusCircle } from "@phosphor-icons/react";
+import { useState } from "react";
+
+const DelCollectButton = ({ anime_mal_id, user_email }) => {
+  const [isDel, setIsDel] = useState(false);
+
+  const handleDelColl = async () => {
+    const data = { anime_mal_id, user_email };
+
+    const response = await fetch("/api/v1/collection", {
+      method: "DELETE",
+      body: JSON.stringify(data)
+    });
+
+    //* client side
+    if (response.status === 200) {
+      setIsDel(true);
+    }
+
+    //! for server side
+    if (response.ok) {
+      console.log(response.statusText);
+    } else {
+      console.error(response);
+    }
+  };
+
+  return (
+    <>
+      <>
+        {isDel && alert("Anime Removed Successfully")}
+        <div>
+          <button
+            onClick={handleDelColl}
+            className="flex flex-wrap items-center justify-center gap-2 p-2 m-3 transition-all rounded-md hover:text-color-primary bg-color-accent hover:bg-color-alter">
+            <span className="font-bold">
+              <MinusCircle size={20} />
+            </span>
+            Remove
+          </button>
+        </div>
+      </>
+    </>
+  );
+};
+
+export default DelCollectButton;

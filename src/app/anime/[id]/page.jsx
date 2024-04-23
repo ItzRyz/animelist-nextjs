@@ -4,11 +4,16 @@ import Image from "next/image";
 import CollectionButton from "@/components/ButtonFunction/CollectionButton";
 import { authSession } from "@/libs/auth-libs";
 import ButtonHis from "@/components/ButtonFunction/ButtonHis";
+import { PrismaClient } from "@prisma/client";
+import DelCollectButton from "@/components/ButtonFunction/DelCollectButton";
 
 const Page = async ({ params: { id } }) => {
+  const prisma = new PrismaClient();
   const anime = await getAnimeResponse(`anime/${id}`);
-
   const user = await authSession();
+  const collection = await prisma.collection.findFirst({
+    where: { user_email: user?.email, anime_mal_id: id }
+  });
 
   return (
     <>
@@ -18,7 +23,21 @@ const Page = async ({ params: { id } }) => {
           <h3 className="ml-3 text-2xl text-color-primary">
             {anime.data.title} - {anime.data.year}
           </h3>
-          <CollectionButton anime_mal_id={id} user_email={user?.email} />
+          {!collection && user ? (
+            <CollectionButton
+              anime_mal_id={id}
+              user_email={user?.email}
+              anime_title={anime.data?.title}
+              anime_image={anime.data?.images.webp.large_image_url}
+            />
+          ) : (
+            <DelCollectButton
+              anime_mal_id={id}
+              user_email={user?.email}
+              anime_title={anime.data?.title}
+              anime_image={anime.data?.images.webp.large_image_url}
+            />
+          )}
         </div>
         <div className="flex gap-2 px-4 pt-4 overflow-x-auto text-color-primary">
           <div className="flex flex-col items-center justify-center p-2 border rounded w-36 border-color-primary">

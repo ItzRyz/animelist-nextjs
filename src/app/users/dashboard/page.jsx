@@ -16,9 +16,9 @@ const Page = async () => {
           My Collection
         </Link>
         <Link
-          href={"/users/dashboard/collection"}
+          href={"/users/dashboard/comment"}
           className="w-32 p-2 font-bold text-center transition-all rounded-sm text-md bg-color-accent text-color-dark hover:text-color-primary">
-          Saved
+          My Comment
         </Link>
       </div>
     </div>

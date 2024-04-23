@@ -1,34 +1,45 @@
 "use client";
 
 import { PlusCircle } from "@phosphor-icons/react/dist/ssr";
+import { useState } from "react";
 
-const CollectionButton = ({ anime_mal_id, user_email }) => {
+const CollectionButton = ({ anime_mal_id, user_email, anime_title, anime_image }) => {
+  const [isSaved, setIsSaved] = useState(false);
+
   const handleCollection = async () => {
-    const data = { anime_mal_id, user_email };
+    const data = { anime_mal_id, user_email, anime_title, anime_image };
 
     const response = await fetch("/api/v1/collection", {
       method: "POST",
       body: JSON.stringify(data)
     });
 
+    //* client side
+    if (response.status === 200) {
+      setIsSaved(true);
+    }
+
+    //! for server side
     if (response.ok) {
-      // const collection = await response.json();
-      console.log(response); // ini undefined wait
+      console.log(response.statusText);
     } else {
-      console.log(response);
+      console.error(response);
     }
   };
   return (
-    <div>
-      <button
-        onClick={handleCollection}
-        className="flex flex-wrap items-center justify-center gap-2 p-2 m-3 transition-all rounded-md hover:text-color-primary bg-color-accent hover:bg-color-alter">
-        <span className="font-bold">
-          <PlusCircle size={20} />
-        </span>
-        Add
-      </button>
-    </div>
+    <>
+      {isSaved && alert("Saved Successfully")}
+      <div>
+        <button
+          onClick={handleCollection}
+          className="flex flex-wrap items-center justify-center gap-2 p-2 m-3 transition-all rounded-md hover:text-color-primary bg-color-accent hover:bg-color-alter">
+          <span className="font-bold">
+            <PlusCircle size={20} />
+          </span>
+          Save
+        </button>
+      </div>
+    </>
   );
 };
 
