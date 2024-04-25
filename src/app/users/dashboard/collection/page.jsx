@@ -26,10 +26,7 @@ const Page = async () => {
       <div className="grid grid-cols-2 gap-3 mx-2 sm:grid-cols-3 lg:grid-cols-6">
         {collection.map((collect, index) => {
           return (
-            <Link
-              key={index}
-              href={`/anime/${collect.anime_mal_id}`}
-              className="relative border-2 border-color-accent">
+            <Link key={index} href={`/anime/${collect.anime_mal_id}`} className="relative">
               <Image src={collect.anime_image} alt="" width={350} height={350} className="w-full" />
               <div className="absolute bottom-0 flex items-center justify-center w-full h-10 bg-color-accent">
                 <h5 className="text-lg text-center md:text-xl">{collect.anime_title}</h5>

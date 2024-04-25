@@ -6,6 +6,7 @@ import { authSession } from "@/libs/auth-libs";
 import ButtonHis from "@/components/ButtonFunction/ButtonHis";
 import { PrismaClient } from "@prisma/client";
 import DelCollectButton from "@/components/ButtonFunction/DelCollectButton";
+import CommentSection from "@/components/AnimeList/CommentSection";
 
 const Page = async ({ params: { id } }) => {
   const prisma = new PrismaClient();
@@ -66,6 +67,9 @@ const Page = async ({ params: { id } }) => {
             className="object-cover w-full rounded"
           />
           <p className="text-xl text-justify">{anime.data.synopsis}</p>
+        </div>
+        <div className="px-4 py-6">
+          <CommentSection />
         </div>
       </div>
       <div>
