@@ -3,10 +3,10 @@ import Header from "@/components/AnimeList/Header";
 import { getAnimeResponse, getNestedAnimeResponse, reproduce } from "@/libs/api-libs";
 
 const Page = async () => {
-  const topAnime = await getAnimeResponse("top/anime", "limit=8");
+  const topAnime = await getAnimeResponse("top/anime", "limit=12");
 
   let recommendedAnime = await getNestedAnimeResponse("recommendations/anime", "entry");
-  recommendedAnime = reproduce(recommendedAnime, 8);
+  recommendedAnime = reproduce(recommendedAnime, 12);
 
   return (
     <>
