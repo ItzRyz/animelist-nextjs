@@ -6,7 +6,8 @@ import { useState } from "react";
 const CollectionButton = ({ anime_mal_id, user_email, anime_title, anime_image }) => {
   const [isSaved, setIsSaved] = useState(false);
 
-  const handleCollection = async () => {
+  const handleCollection = async (e) => {
+    e.preventDefault();
     const data = { anime_mal_id, user_email, anime_title, anime_image };
 
     const response = await fetch("/api/v1/collection", {
@@ -15,7 +16,7 @@ const CollectionButton = ({ anime_mal_id, user_email, anime_title, anime_image }
     });
 
     //* client side
-    if (response.status === 200) {
+    if (response.status == 200) {
       setIsSaved(true);
     }
 
