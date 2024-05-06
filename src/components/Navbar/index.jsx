@@ -11,7 +11,9 @@ const Navbar = () => {
           className="text-2xl font-bold transition-all text-color-dark hover:text-color-primary">
           ANIMELIST
         </Link>
-        <InputSearch />
+        <div className="flex justify-center w-full md:pl-24 md:w-auto">
+          <InputSearch />
+        </div>
         <UserActionBtn />
       </div>
     </header>

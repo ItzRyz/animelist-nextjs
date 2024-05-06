@@ -5,7 +5,13 @@ export async function POST(req) {
   try {
     const prisma = new PrismaClient();
     const data = await req.json();
-    if (!data?.user_email && !data?.anime_mal_id && !data?.comment && !data?.username)
+    if (
+      !data?.user_email &&
+      !data?.anime_mal_id &&
+      !data?.comment &&
+      !data?.username &&
+      !data?.anime_title
+    )
       return NextResponse.json({ message: "Bad Request on Comment" }, { status: 400 });
     const createComment = await prisma.comment.create({ data });
     if (createComment) {

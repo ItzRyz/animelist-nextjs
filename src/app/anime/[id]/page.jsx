@@ -69,7 +69,12 @@ const Page = async ({ params: { id } }) => {
           <p className="text-xl text-justify">{anime.data.synopsis}</p>
         </div>
         <div className="px-4 py-6">
-          <CommentSection anime_mal_id={id} user_email={user?.email} username={user?.name} />
+          <CommentSection
+            anime_mal_id={id}
+            user_email={user?.email}
+            username={user?.name}
+            anime_title={anime.data?.title}
+          />
         </div>
       </div>
       <div>
