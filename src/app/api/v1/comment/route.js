@@ -24,3 +24,23 @@ export async function POST(req) {
     );
   }
 }
+
+export async function GET(req) {
+  try {
+    const prisma = new PrismaClient();
+    const data = await req.json();
+    const { anime_mal_id } = data;
+    if (!anime_mal_id)
+      return NextResponse.json({ message: "Bad Request on Comment GET" }, { status: 400 });
+
+    const comments = await prisma.comment.findMany({
+      where: { anime_mal_id }
+    });
+    return NextResponse.json(comments, { status: 200 });
+  } catch (e) {
+    return NextResponse.json(
+      { message: "Internal server Error", error: e.message },
+      { status: 500 }
+    );
+  }
+}

@@ -6,7 +6,7 @@ const Notification = ({ message }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShow(false);
-    }, 3000); // Menutup toast setelah 3 detik
+    }, 10000);
 
     return () => clearTimeout(timer);
   }, []);

@@ -2,9 +2,13 @@
 
 import { MinusCircle } from "@phosphor-icons/react";
 import { useState } from "react";
+import Notification from "@/components/Toast";
+import { useRouter } from "next/navigation";
 
 const DelCollectButton = ({ anime_mal_id, user_email }) => {
   const [isDel, setIsDel] = useState(false);
+
+  const router = useRouter();
 
   const handleDelColl = async () => {
     const data = { anime_mal_id, user_email };
@@ -17,6 +21,9 @@ const DelCollectButton = ({ anime_mal_id, user_email }) => {
     //* client side
     if (response.status === 200) {
       setIsDel(true);
+      setTimeout(() => {
+        router.refresh();
+      }, 4000);
     }
 
     //! for server side
@@ -30,7 +37,7 @@ const DelCollectButton = ({ anime_mal_id, user_email }) => {
   return (
     <>
       <>
-        {isDel && alert("Anime Removed Successfully")}
+        {isDel && <Notification message={"Remove From Favorite"} />}
         <div>
           <button
             onClick={handleDelColl}

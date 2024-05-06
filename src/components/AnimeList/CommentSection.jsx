@@ -2,14 +2,21 @@
 
 import { useState } from "react";
 import Notification from "@/components/Toast";
+import { useRouter } from "next/navigation";
 
 const CommentSection = ({ anime_mal_id, user_email, username, anime_title }) => {
   const [isComment, setIsComment] = useState("");
   const [isSend, setIsSend] = useState(false);
-  const [reload, setReload] = useState(false);
 
+  const router = useRouter();
+
+  const MAX_COMMENT_WORDS = 50;
   const handleInput = (e) => {
-    setIsComment(e.target.value);
+    const comment = e.target.value;
+    const words = comment.trim().split(/\s+/);
+    if (words.length <= MAX_COMMENT_WORDS) {
+      setIsComment(comment);
+    }
   };
 
   const handlePost = async (e) => {
@@ -23,7 +30,10 @@ const CommentSection = ({ anime_mal_id, user_email, username, anime_title }) => 
 
     if (response.status === 200) {
       setIsSend(true);
-      setReload(true);
+      setTimeout(() => {
+        setIsComment("");
+        router.refresh();
+      }, 4000);
     }
 
     if (response.ok) {
@@ -32,13 +42,6 @@ const CommentSection = ({ anime_mal_id, user_email, username, anime_title }) => 
       console.error(response);
     }
   };
-
-  if (reload) {
-    setTimeout(() => {
-      window.location.reload(true);
-      setReload(false);
-    }, 2000);
-  }
 
   return (
     <>
