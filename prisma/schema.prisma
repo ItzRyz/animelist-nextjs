@@ -31,3 +31,11 @@ model Comment {
   username     String
   anime_title  String?
 }
+
+model Users {
+  id       Int    @id @default(autoincrement())
+  username String
+  password String
+
+  @@unique([username])
+}
