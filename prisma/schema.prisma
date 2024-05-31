@@ -13,6 +13,170 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Category {
+  id Int @id @default(autoincrement())
+
+  name String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Status Status[]
+}
+
+model Status {
+  id Int @id @default(autoincrement())
+
+  name String
+
+  category_id Int
+  category    Category @relation(fields: [category_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Producers {
+  id Int @id @default(autoincrement())
+
+  name String
+  url  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  AnimeProducers AnimeProducers[]
+}
+
+model Licensors {
+  id Int @id @default(autoincrement())
+
+  name String
+  url  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  AnimeLicensors AnimeLicensors[]
+}
+
+model Studios {
+  id Int @id @default(autoincrement())
+
+  name String
+  url  String?
+
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  AnimeStudios AnimeStudios[]
+}
+
+model Genres {
+  id Int @id @default(autoincrement())
+
+  name String
+  url  String?
+
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  AnimeGenres AnimeGenres[]
+}
+
+model Themes {
+  id Int @id @default(autoincrement())
+
+  name String
+  url  String?
+
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  AnimeThemes AnimeThemes[]
+}
+
+model Animes {
+  id Int @id @default(autoincrement())
+
+  title       String
+  images      String @db.LongText
+  description String @db.LongText
+  synopsys    String @db.LongText
+  season      String
+
+  type    String
+  source  String
+  episode Int
+  status  String
+
+  airing     Boolean
+  aired_from DateTime
+  aired_to   DateTime
+
+  duration String
+  rating   String
+
+  score     Int
+  scored_by Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  producers      AnimeProducers[]
+  AnimeLicensors AnimeLicensors[]
+  AnimeStudios   AnimeStudios[]
+  AnimeGenres    AnimeGenres[]
+  AnimeThemes    AnimeThemes[]
+}
+
+model AnimeProducers {
+  id Int @id @default(autoincrement())
+
+  anime_id    Int
+  producer_id Int
+
+  animes    Animes    @relation(fields: [anime_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  producers Producers @relation(fields: [producer_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model AnimeLicensors {
+  id Int @id @default(autoincrement())
+
+  anime_id    Int
+  licensor_id Int
+
+  animes    Animes    @relation(fields: [anime_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  licensors Licensors @relation(fields: [licensor_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model AnimeStudios {
+  id Int @id @default(autoincrement())
+
+  anime_id  Int
+  studio_id Int
+
+  animes  Animes  @relation(fields: [anime_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  studios Studios @relation(fields: [studio_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model AnimeGenres {
+  id Int @id @default(autoincrement())
+
+  anime_id Int
+  genre_id Int
+
+  animes Animes @relation(fields: [anime_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  genres Genres @relation(fields: [genre_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model AnimeThemes {
+  id Int @id @default(autoincrement())
+
+  anime_id Int
+  theme_id Int
+
+  animes Animes @relation(fields: [anime_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  themes Themes @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
 model Collection {
   id           Int     @id @default(autoincrement())
   anime_mal_id String
@@ -33,9 +197,29 @@ model Comment {
 }
 
 model Users {
-  id       Int    @id @default(autoincrement())
-  username String
-  password String
+  id Int @id @default(autoincrement())
+
+  profile Profile?
+
+  username        String
+  email           String @unique
+  password        String
+  twofactor_token String
 
   @@unique([username])
+}
+
+model Profile {
+  id Int @id @default(autoincrement())
+
+  user    Users @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user_id Int   @unique
+
+  name    String
+  birth   DateTime?
+  bio     String?
+  picture String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
